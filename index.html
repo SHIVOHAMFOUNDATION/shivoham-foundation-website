@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shivoham Foundation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; line-height: 1.7; font-weight: 400; color: #333; }
+
+    h1, h2, h3 { font-weight: 700; letter-spacing: 0.5px; }
+    p { font-weight: 300; font-size: 16px; color: #555; }
+
+    header {
+      background: linear-gradient(to right, #ff8000, #ff9933, #ffcc66);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 { font-size: 26px; font-weight: 700; letter-spacing: 1px; }
+
+    nav a {
+      color: white;
+      margin-left: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: white;
+      left: 0;
+      bottom: -5px;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after { width: 100%; }
+
+    .hero {
+      height: 90vh;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('temple.jpeg');
+      background-size: cover;
+      background-position: center center;
+      filter: contrast(1.1) brightness(1.05) saturate(1.1);
+      image-rendering: auto;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    .hero h2 {
+      font-size: 56px;
+      margin-bottom: 15px;
+      font-weight: 700;
+      color: #ffd700;
+      text-shadow: 0 0 10px rgba(255,215,0,0.8), 0 0 20px rgba(255,215,0,0.6), 0 0 30px rgba(255,140,0,0.6);
+      animation: glow 2s ease-in-out infinite alternate, fadeUp 1.5s ease forwards;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px rgba(255,215,0,0.6), 0 0 20px rgba(255,140,0,0.5); }
+      to { text-shadow: 0 0 20px rgba(255,215,0,1), 0 0 40px rgba(255,140,0,0.9); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero p { font-size: 20px; margin-bottom: 20px; font-weight: 300; }
+
+    .btn {
+      background: linear-gradient(45deg, #ff8000, #ffcc33);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    section { padding: 60px 40px; }
+    .container { max-width: 1100px; margin: auto; }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      border-top: 4px solid #ff9933;
+      text-align: center;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .card:hover { transform: translateY(-10px); }
+    .card img { width: 60px; height: 60px; margin-bottom: 15px; }
+    .card h3 { margin-bottom: 10px; }
+
+    .contact p { margin-bottom: 10px; }
+
+    footer {
+      background: #cc6600;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Floating Contact Button */
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(45deg, #ff8000, #ffcc33);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      max-width: 500px;
+      margin: 30px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .contact-form button {
+      background: linear-gradient(45deg, #ff8000, #ffcc33);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Scan to Donate Animation */
+    .scan-text {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ff8000;
+      animation: pulseText 1.5s infinite;
+    }
+
+    @keyframes pulseText {
+      0% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+      100% { opacity: 0.6; transform: scale(1); }
+    }
+
+    .qr-box {
+      display: inline-block;
+      padding: 15px;
+      border-radius: 20px;
+      background: white;
+      animation: glowBox 2s infinite alternate;
+    }
+
+    @keyframes glowBox {
+      from { box-shadow: 0 0 10px rgba(255,140,0,0.4); }
+      to { box-shadow: 0 0 25px rgba(255,140,0,0.9); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <img src="logo.jpeg" alt="logo" style="width:45px; height:45px; border-radius:50%;">
+      <div>
+      <h1 style="margin:0;">Shivoham Foundation</h1>
+      <p style="margin:0; font-size:13px; font-weight:700; letter-spacing:1px;">Love is God | Silence is Mantra | Service is the Holy river | Peace is Heaven</p>
+    </div>
+    </div>
+    <nav></nav>
+  </div>
+</header>
+
+<section class="hero"></section>
+
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">About Us</h2>
+    <p style="text-align:center; max-width:700px; margin:auto;">
+      Shivoham Foundation is committed to uplifting underprivileged communities through sustainable initiatives including housing, education, healthcare, and rural development.
+    </p>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title">Our Projects & Impact Vision</h2>
+
+    <p style="text-align:center; max-width:900px; margin:auto; margin-bottom:40px;">
+      Shivoham Foundation is dedicated to implementing sustainable and scalable development initiatives across rural and underserved communities. Our projects are designed to create long-term social impact by addressing fundamental needs such as housing, education, healthcare, water access, and livelihood development.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <img src="logo.jpeg" alt="logo">
+        <h3>🏡 Housing for the Needy</h3>
+        <p>Development of safe and sustainable housing solutions for homeless and economically weaker families, ensuring dignity, security, and improved quality of life.</p>
+      </div>
+
+      <div class="card">
+        <img src="logo.jpeg" alt="logo">
+        <h3>📚 Libraries & Education</h3>
+        <p>Establishment of rural libraries and educational support systems to empower children and youth through knowledge access, literacy programs, and learning resources.</p>
+      </div>
+
+      <div class="card">
+        <img src="logo.jpeg" alt="logo">
+        <h3>⚽ Sports Development</h3>
+        <p>Promotion of sports and physical well-being by providing infrastructure and equipment, encouraging youth engagement, discipline, and talent development.</p>
+      </div>
+
+      <div class="card">
+        <img src="logo.jpeg" alt="logo">
+        <h3>🐄 Goshala (Cow Protection Initiative)</h3>
+        <p>Establishment and maintenance of goshalas focused on animal welfare, preservation of indigenous breeds, and ethical care practices.</p>
+      </div>
+
+      <div class="card">
+        <img src="logo.jpeg" alt="logo">
+        <h3>💧 Drinking Water Facilities</h3>
+        <p>Implementation of clean drinking water solutions including borewells, purification systems, and storage facilities to ensure safe water access in rural regions.</p>
+      </div>
+
+      <div class="card">
+        <img src="logo.jpeg" alt="logo">
+        <h3>🏥 Healthcare & Sanitation</h3>
+        <p>Organizing medical camps, awareness programs, and sanitation initiatives aimed at improving public health standards in underserved communities.</p>
+      </div>
+
+      <div class="card">
+        <img src="logo.jpeg" alt="logo">
+        <h3>🌾 Rural & Tribal Development</h3>
+        <p>Integrated rural development programs focusing on infrastructure, livelihood support, education, and overall socio-economic upliftment of tribal and rural populations.</p>
+      </div>
+
+      <div class="card">
+        <img src="logo.jpeg" alt="logo">
+        <h3>👩‍🌾 Women Empowerment</h3>
+        <p>Empowering women through self-help groups, skill development, financial literacy, and entrepreneurship opportunities to build independence and leadership in rural communities.</p>
+      </div>
+
+      <div class="card">
+        <img src="logo.jpeg" alt="logo">
+        <h3>🌱 Agriculture Development</h3>
+        <p>Supporting farmers with modern agricultural practices, irrigation solutions, organic farming, and training programs to improve productivity and sustainable livelihoods.</p>
+      </div>
+
+      <div class="card">
+        <img src="logo.jpeg" alt="logo">
+        <h3>🌍 Socio-Economic Development</h3>
+        <p>Focused on uplifting rural and tribal areas through integrated socio-economic development initiatives, with special emphasis on empowering women through livelihood opportunities, education, and sustainable community growth.</p>
+      </div>
+    </div>
+
+    <p style="text-align:center; max-width:900px; margin:40px auto 0; font-weight:500;">
+      Our vision is to create a self-sustaining ecosystem of development where communities are empowered, resources are accessible, and every individual has the opportunity to lead a dignified life.
+    </p>
+
+  </div>
+</section>
+
+<section id="donate">
+  <div class="container" style="text-align:center;">
+    <h2 class="section-title">Support Our Mission</h2>
+    <p style="max-width:700px; margin:auto; margin-bottom:20px;">
+      Your contribution helps us provide housing, education, healthcare, and essential services to underprivileged communities.
+    </p>
+
+    <p class="scan-text">✨ Scan to Donate ✨</p>
+    <div class="qr-box">
+      <img src="qr.jpeg" alt="UPI QR" style="width:220px; height:220px; object-fit:cover; object-position:center; display:block; border-radius:15px;">
+    </div>
+
+    <hr style="margin:30px 0;">
+
+    <p style="font-weight:600; margin-bottom:10px;">Bank Transfer Details</p>
+    <p><strong>Account Name:</strong> Shivoham Foundation</p>
+    <p><strong>Account Number:</strong> 41947353761</p>
+    <p><strong>IFSC Code:</strong> SBIN0008155</p>
+    <p><strong>Bank Name:</strong> State Bank of India</p>
+    <p><strong>Branch:</strong> NSN Palayam, Coimbatore</p>
+
+    <p style="margin-top:15px; font-size:13px; color:#777;">
+      *All donations are used for charitable activities and development programs.
+    </p>
+
+    <button onclick="thankYou()" class="btn" style="margin-top:20px;">I Have Donated</button>
+    <p id="thankMsg" style="margin-top:15px; font-weight:600; color:green; display:none;">🙏 Thank you for your support! Your contribution makes a real difference.</p>
+  </div>
+</section>
+
+<section id="join">
+  <div class="container" style="text-align:center;">
+    <h2 class="section-title">Join Shivoham Foundation</h2>
+    <p style="max-width:700px; margin:auto; margin-bottom:20px;">
+      Become a volunteer member of Shivoham Foundation and take part in meaningful social service activities. Join hands with the trust to support and uplift those in need, and contribute towards building a better society. This contribution is for individuals who are passionate about serving society. All applications will be reviewed and approved by the management.
+    </p>
+    <p style="font-weight:600; margin-bottom:20px;">A donation of ₹500 to the trust</p>
+    
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSci5oPFUNU3DZ4bQv75waJuRUFtqPTlmROR-Kwuh1N9ddfKwQ/viewform?usp=dialog" target="_blank" class="btn">Apply to Join</a>
+    
+    <p style="margin-top:15px; font-size:14px; color:#777;">
+      *After submission, approval will be required before membership confirmation.
+    </p>
+  </div>
+</section>
+
+<section id="impact">
+  <div class="container" style="text-align:center;">
+    <h2 class="section-title">Our Impact Vision</h2>
+    <div class="cards">
+      <div class="card"><h3>1000+ Villages</h3><p>Targeted for integrated development initiatives.</p></div>
+      <div class="card"><h3>10,000+ Lives</h3><p>Planned beneficiaries through multi-sector programs.</p></div>
+      <div class="card"><h3>Housing Projects</h3><p>Safe shelter for homeless families.</p></div>
+      <div class="card"><h3>Education Access</h3><p>Libraries and learning support for rural youth.</p></div>
+      <div class="card"><h3>Women Empowerment</h3><p>Supporting women through skills, leadership, and economic independence.</p></div>
+      <div class="card"><h3>Agriculture Growth</h3><p>Improving farmer income through sustainable and modern practices.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="csr">
+  <div class="container" style="text-align:center;">
+    <h2 class="section-title">CSR & Government Partnership</h2>
+    <p style="max-width:900px; margin:auto;">
+      Shivoham Foundation welcomes collaborations with corporate CSR partners, government bodies, and philanthropic organizations to implement scalable and high-impact social development projects.
+    </p>
+    <p style="margin-top:20px; font-weight:500;">
+      We ensure transparency, accountability, and measurable outcomes in all our initiatives.
+    </p>
+  </div>
+</section>
+
+<section id="documents">
+  <div class="container" style="text-align:center;">
+    <h2 class="section-title">Compliance & Documents</h2>
+    <p>12A Registration – (To be updated)</p>
+    <p>80G Certification – (To be updated)</p>
+    <p>Trust Deed & Legal Documents – Available on request</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container contact" style="text-align:center;">
+    <h2 class="section-title">Contact Us</h2>
+
+    <p><strong>Phone:</strong> <a href="tel:+919489580845">+91 94895 80845</a></p>
+    <p><strong>Phone:</strong> <a href="tel:+919787158621">+91 97871 58621</a></p>
+    <p><strong>Email:</strong> shivohamtk2023@gmail.com</p>
+
+    <div class="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </div>
+
+    <br>
+    <p><strong>Office Address:</strong><br>
+    No. 77, E2,<br>
+    Appanaicken Palayam,<br>
+    Thudiyalur,<br>
+    Coimbatore,<br>
+    Tamil Nadu - 641 017</p>
+
+    <br>
+    <p><strong>Temple Address:</strong><br>
+    Arulmigu Sarvalingeshwarar Aalayam,<br>
+    Shivoham Thavakudil,<br>
+    Malliyampatti Road,<br>
+    Panayampalli, Sakthi TK,<br>
+    Erode - 638 459</p>
+
+    <div style="margin-top:20px;">
+      <a href="https://maps.app.goo.gl/BU6DxKuiRwJgYHXF9" target="_blank" class="btn">View Temple Location</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Shivoham Foundation | Designed for Social Impact</p>
+</footer>
+
+<a href="#contact" class="floating-btn">Contact</a>
+
+<script>
+function thankYou(){
+  document.getElementById('thankMsg').style.display='block';
+}
+</script>
+</body>
+</html>
